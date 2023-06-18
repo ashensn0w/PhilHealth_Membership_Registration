@@ -172,7 +172,7 @@
                 <!-- ============ <REGISTRATION> ============ -->
                 <div class="right__side">
                     <!-- PERSONAL DETAILS -->
-                    <div class="main__form">
+                    <div class="main__form active">
                         <div class="input__text">
                             <div class="input__div">
                                 <input type="text" required require id="PIN" placeholder="xxx" pattern="\d{12}">
@@ -391,21 +391,21 @@
 
 
                     <!-- MEMBER TYPE -->
-                    <div class="main__form active">
+                    <div class="main__form">
                         <h2>Contributor Type:</h2>
+                        <div class="radio__container">
+                            <form>
+                                <label>
+                                    <input type="radio" id="direct" onclick="updateMemberTypeOptions();" name="cont_type">
+                                    <span>Direct Contributor</span>
+                                </label>
+                                <label>
+                                    <input type="radio" id="indirect" onclick="updateMemberTypeOptions();" name="cont_type">
+                                    <span>Indirect Contributor</span>
+                                </label>
+                            </form>
+                        </div>
                         <div class="input__text">
-                            <div class="radio__container">
-                                <form>
-                                    <label>
-                                        <input type="radio" id="direct" onclick="updateMemberTypeOptions();" name="cont_type">
-                                        <span>Direct Contributor</span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" id="indirect" onclick="updateMemberTypeOptions();" name="cont_type">
-                                        <span>Indirect Contributor</span>
-                                    </label>
-                                </form>
-                            </div>
                             <div class="input__div">
                                 <select required require id="membertype">
                                     <option value="" disabled selected hidden>Member Type <strong style="color: red;">*</strong>
@@ -429,7 +429,7 @@
                                 <span>PROOF OF INCOME <strong style="color: red;">*</strong></span>
                             </div>
                         </div>
-                        <h2>For PhilHealth Use only:</h2><br>
+                        <h2>For PhilHealth Use only:</h2>
                         <div class="radio__container">
                             <form>
                                 <label>

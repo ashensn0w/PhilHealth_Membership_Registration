@@ -719,7 +719,8 @@ button.inactive {
   color: #333;
 }
 .right__side .radio__container {
-  margin-top: -15px;
+  margin-top: 15px;
+  margin-bottom: -10px;
 }
 .right__side .radio__container form {
   display: flex;

@@ -300,6 +300,7 @@ function addOption(selectElement, optionText) {
 /*=== TO DISABLE TEXT INPUT IF MEMBER TYPE IS EMPLOYED, LIFETIME MEMBERS, OR SEA-BASED MIGRANT WORKERS ===*/
 
 document.getElementById('membertype').addEventListener('change', updateTextInputStatus);
+document.getElementById('indirect').addEventListener('change', updateTextInputStatus);
 
 function updateTextInputStatus() {
     var memberTypeSelect = document.getElementById('membertype');
@@ -307,6 +308,7 @@ function updateTextInputStatus() {
     var monthlyIncomeInput = document.getElementById('monthly_income');
     var incomeProofInput = document.getElementById('income_proof');
     var selectedOption = memberTypeSelect.value;
+    var indirectRadio = document.getElementById('indirect');
 
     if (selectedOption === 'Employed Private' ||
         selectedOption === 'Employed Government' ||
@@ -320,6 +322,14 @@ function updateTextInputStatus() {
 
         incomeProofInput.disabled = true;
         incomeProofInput.value = 'Not Applicable';
+    } else if (indirectRadio.checked) {
+        professionInput.disabled = false;
+        professionInput.value = '';
+
+        monthlyIncomeInput.disabled = false;
+
+        incomeProofInput.disabled = false;
+        incomeProofInput.value = '';
     } else {
         professionInput.disabled = false;
         professionInput.value = '';
