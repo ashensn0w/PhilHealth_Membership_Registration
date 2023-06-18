@@ -6,10 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- ============ BOX ICONS ============ -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+ 
     <!-- ============ css ============ -->
     <link rel="stylesheet" href=".\style\css\style.css">
 
-    <title>PhilHealth Home</title>
+    <title>PhilHealth Membership Registration</title>
 </head>
 
 <body>
@@ -37,12 +40,28 @@
                     </li>
 
                     <li class="nav__item">
-                        <a href="registration.html" class="nav__link active-link">Register</a>
+                        <a href="registration.html" class="nav__link active__link">Register</a>
                     </li>
 
+                    <!--
                     <li class="nav__item">
                         <a href="loginAcc.html" class="nav__link">Log in</a>
                     </li>
+                    -->
+
+                    <li class="nav__item">
+                        <a href="#" class="nav__link" onclick="toggleMenu()">
+                            <i class='bx bxs-user-circle' id="profile__icon"></i>
+                            <i class='bx bx-chevron-down'></i>
+                        </a>
+                        <div class="sub__menu__wrap" id="sub-menu-wrap">
+                            <div class="sub__menu">
+                                <a href="profile.html" class="sub__menu__opt">Profile</a>
+                                <hr>
+                                <a href="index.html" class="sub__menu__opt" onclick="toggleLogin()">Logout</a>
+                            </div>
+                        </div>
+                    </li>   
                 </ul>
             </div>
             <!-- ============ </NAVIGATION MENU> ============ -->
@@ -50,93 +69,11 @@
     </header>
     <!-- ============ </HEADER> ============ -->
 
-
-    <!-- ============ <QUALIFICATIONS> ============ -->
-    <div id="qualifications" class="overlay">
-        <div class="popup">
-            <h2>Qualifications</h2>
-            <div class="content members">
-                <h3 class="qualification__subtitle">PhilHealth Member</h3>
-                <ul>
-                    <li>
-                        Members of the informal economy from the lower income segment who do not qualify for full
-                        subsidy under the means test rule of the DSWD, whose premium contribution shall be subsidized by
-                        the LGUs or shall be through cost-sharing mechanisms between/among LGUs, and/or legislative
-                        sponsors, and/or other sponsors and/or the member, including the National Government;
-                    </li>
-
-                    <li>
-                        Orphans, abandoned (children who have no known family willing and capable to take care of them
-                        and are under the care of the DSWD, orphanages, churches and other institutions) and abused
-                        minors, out-of-school youths, street children, persons with disability (PWD), senior citizens
-                        and battered women under the care of the DSWD, or any of its accredited institutions run by NGOs
-                        or any non-profit private organizations, whose premium contributions shall be paid for by the
-                        DSWD;
-                    </li>
-
-                    <li>
-                        Barangay health workers, nutrition scholars, barangay tanods, and other barangay workers and
-                        volunteers, whose premium contributions shall be fully borne by the LGUs concerned; and
-                    </li>
-
-                    <li>
-                        Un-enrolled women who are about to give birth, whose premium contributions shall be fully borne
-                        by the National Government and/or LGUs and/or legislative sponsors or the DSWD if such woman is
-                        an indigent as determined by it through the means test.
-                    </li>
-                </ul>
-            </div>
-            <div class="content dependents">
-                <h3 class="qualification__subtitle">PhilHealth Member's Dependents</h3>
-                <ul>
-                    <li>
-                        Legitimate spouse who is not a member
-                    </li>
-
-                    <li>
-                        Child or children - legitimate, legitimated, acknowledged and illegitimate (as appearing in
-                        birth certificate) adopted or stepchild or stepchildren below 21 years of age, unmarried and
-                        unemployed.
-                    </li>
-
-                    <li>
-                        Children who are twenty-one (21) years old or above but suffering from congenital disability,
-                        either physical or mental, or any disability acquired that renders them totally dependent on the
-                        member for support, as determined by the Corporation
-                    </li>
-
-                    <li>
-                        Foster child as defined in Republic Act 10165 otherwise known as the Foster Care Act of 2012
-                    </li>
-
-                    <li>
-                        Parents who are sixty (60) years old or above, not otherwise an enrolled member, whose monthly
-                        income is below an amount to be determined by PhilHealth in accordance with the guiding
-                        principles set forth in the NHI Act of 2013; and,
-                    </li>
-
-                    <li>
-                        Parents with permanent disability regardless of age as determined by PhilHealth, that renders
-                        them totally dependent on the member for subsistence.
-                    </li>
-                </ul>
-            </div>
-            <a class="close" href="#">&times;</a>
-        </div>
-    </div>
-    <!-- ============ <END OF QUALIFICATIONS> ============ -->
-
-
-    <!-- ============ <REGISTRATION> ============ -->
+    <!-- ============ <FORM> ============ -->
     <div class="registration__container container grid">
         <div class="card">
             <div class="form">
                 <div class="left__side">
-
-                    <!-- CURRENT STEP LABEL -->
-                    <div class="steps__content">
-                        <h3 class="step__number">Step 1</h3>
-                    </div>
 
                     <!-- PROGRESS BAR LABEL  -->
                     <ul class="progress__bar">
@@ -150,13 +87,10 @@
                         <li>
                             <p>Member Type</p>
                         </li>
-                        <li>
-                            <p>Submit
                     </ul>
                 </div>
 
-
-                <!-- ============ <REGISTRATION> ============ -->
+                <!-- ============ <FORM REVIEW> ============ -->
                 <div class="right__side">
                     <!-- PERSONAL DETAILS -->
                     <div class="main__form active">
@@ -267,7 +201,35 @@
 
 
                     <!-- DECLARATION OF DEPENDENTS -->
-                    <div class="main__form">
+                    <div class="main__form" id="dependentform">
+                        <div class="input__text">
+                            <div class="input__div">
+                                <input type="text" id="depFullName" placeholder="xxx" maxlength="50" value="Bernard Angelo Resurreccion" readonly>
+                                <span>Dependent's Fullname (LN, FN MN)</span>
+                            </div>
+                        </div>
+                        <div class="input__text">
+                            <div class="input__div">
+                                <input type="text" id="depBirthDate" value="2003/11/15" readonly>
+                                <span>Birth Date</span>
+                            </div>
+                            <div class="input__div">
+                                <input type="text" id="depFullName" placeholder="xxx" maxlength="50" value="Filipino" readonly>
+                                <span>Citizenship</span>
+                            </div>
+                        </div>
+                        <div class="input__text">
+                            <div class="input__div">
+                                <input type="text" id="depFullName" placeholder="xxx" maxlength="50" value="Yes" readonly>
+                                <span>With Disability</span>
+                            </div>
+                            <div class="input__div">
+                                <div class="input__div">
+                                    <input type="text" id="depFullName" placeholder="xxx" maxlength="50" value="Pusa" readonly>
+                                    <span>Relationship</span>
+                                </div>
+                            </div>
+                        </div>
                         <div class="registration__buttons button_space">
                             <button class="back_button">Previous</button>
                             <button class="next_button">Next</button>
@@ -283,74 +245,60 @@
                             <div class="radio__container">
                                 <form>
                                     <label>
-                                        <input type="radio" id="direct" onclick="updateMemberTypeOptions();" name="cont_type">
+                                        <input type="radio" id="direct" name="cont_type" checked>
                                         <span>Direct Contributor</span>
                                     </label>
                                     <label>
-                                        <input type="radio" id="indirect" onclick="updateMemberTypeOptions();" name="cont_type">
+                                        <input type="radio" id="indirect" name="cont_type" disabled>
                                         <span>Indirect Contributor</span>
                                     </label>
                                 </form>
                             </div>
                             <div class="input__div">
-                                <select required require id="membertype">
-                                    <option value="" disabled selected hidden>Member Type <strong style="color: red;">*</strong>
-                                    </option>
-                                </select>
+                                <input type="text" id="membertype" placeholder="xxx" maxlength="50" value="" readonly>
+                                <span>MEMBER TYPE</span>
                             </div>
                         </div>
                         <div class="input__text">
                             <div class="input__div">
-                                <input type="text" required require id="profession" placeholder="xxx" maxlength="30">
-                                <span>PROFESSION (Except Employed, Lifetime Members, and Sea-Based Migrant Worker) <strong style="color: red;">*</strong></span>
+                                <input type="text" id="profession" placeholder="xxx" maxlength="30" value="" readonly>
+                                <span>PROFESSION (Except Employed, Lifetime Members, and Sea-Based Migrant Worker)</span>
                             </div>
                         </div>
                         <div class="input__text">
                             <div class="input__div">
-                                <input type="number" required require id="monthly_income" placeholder="xxx" min="1" max="999999.99" step=".01" pattern="^\d+(?:\.\d{1,2})?$">
-                                <span>MONTHLY INCOME <strong style="color: red;">*</strong></span>
+                                <input type="number" id="monthly_income" placeholder="xxx" min="1" max="999999.99" step=".01" pattern="^\d+(?:\.\d{1,2})?$" value="" readonly>
+                                <span>MONTHLY INCOME</span>
                             </div>
                             <div class="input__div">
-                                <input type="text" required require id="income_proof" placeholder="xxx" maxlength="30">
-                                <span>PROOF OF INCOME <strong style="color: red;">*</strong></span>
+                                <input type="text" id="income_proof" placeholder="xxx" maxlength="30" value="" readonly>
+                                <span>PROOF OF INCOME</span>
                             </div>
                         </div>
                         <h2>For PhilHealth Use only:</h2><br>
                         <div class="radio__container">
                             <form>
                                 <label>
-                                    <input type="radio" name="pos_type" id="pos">
+                                    <input type="radio" name="pos_type" id="pos" disabled>
                                     <span>Point of Service (POS) Financially Incapable</span>
                                 </label>
                                 <label>
-                                    <input type="radio" name="pos_type" id="notpos">
+                                    <input type="radio" name="pos_type" id="notpos" checked>
                                     <span>Financially Incapable</span>
                                 </label>
                             </form>
                         </div>
                         <div class="registration__buttons button_space">
                             <button class="back_button">Previous</button>
-                            <button class="next_button">Next</button>
                         </div>
                     </div>
                     <!-- END OF MEMBER TYPE -->
-
-
-                    <!-- SUBMIT -->
-                    <div class="main__form">
-                        <div class="registration__buttons button_space">
-                            <button class="back_button">Previous</button>
-                            <button class="submit_button">Submit</button>
-                        </div>
-                    </div>
-                    <!-- END OF SUBMIT -->
-
 
                 </div>
             </div>
         </div>
     </div>
-    <!-- ============ </REGISTRATION> ============ -->
+    <!-- ============ </FORM REVIEW> ============ -->
 
 
     <!-- ============ <FOOTER> ============ -->
