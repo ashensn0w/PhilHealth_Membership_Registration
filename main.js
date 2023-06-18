@@ -231,14 +231,102 @@ let Address2 = document.getElementById("Address2");
 let MailAddress1 = document.getElementById("MailAddress1");
 let MailAddress2 = document.getElementById("MailAddress2");
 
-SameAs.onclick = function(){   
-    if (SameAs.checked){
-        document.getElementById('MailAddress1').value=document.getElementById('Address1').value;
-        document.getElementById('MailAddress2').value=document.getElementById('Address2').value;
+SameAs.onclick = function () {
+    if (SameAs.checked) {
+        document.getElementById('MailAddress1').value = document.getElementById('Address1').value;
+        document.getElementById('MailAddress2').value = document.getElementById('Address2').value;
     }
-    else{
-        document.getElementById('MailAddress1').value='';
-        document.getElementById('MailAddress2').value='';
+    else {
+        document.getElementById('MailAddress1').value = '';
+        document.getElementById('MailAddress2').value = '';
     }
-    
+
 };
+
+/*================ TO DISPLAY MEMBER TYPE DEPENDING ON CONTRIBUTOR TYPE ================*/
+
+document.getElementById('direct').addEventListener('change', updateMemberTypeOptions);
+document.getElementById('indirect').addEventListener('change', updateMemberTypeOptions);
+
+function updateMemberTypeOptions() {
+    var directRadio = document.getElementById('direct');
+    var indirectRadio = document.getElementById('indirect');
+    var memberTypeSelect = document.getElementById('membertype');
+
+    memberTypeSelect.innerHTML = '';
+
+    var defaultOption = document.createElement('option');
+    defaultOption.value = '';
+    defaultOption.disabled = true;
+    defaultOption.selected = true;
+    defaultOption.hidden = true;
+    defaultOption.innerText = 'Member Type *';
+    memberTypeSelect.appendChild(defaultOption);
+
+    if (directRadio.checked) {
+        addOption(memberTypeSelect, 'Employed Private');
+        addOption(memberTypeSelect, 'Employed Government');
+        addOption(memberTypeSelect, 'Professional Practitioner');
+        addOption(memberTypeSelect, 'Self-Earning Individual (Individual)');
+        addOption(memberTypeSelect, 'Self-Earning Individual (Sole Proprietor)');
+        addOption(memberTypeSelect, 'Self-Earning Individual (Group Enrollment Scheme)');
+        addOption(memberTypeSelect, 'Kasambahay');
+        addOption(memberTypeSelect, 'Family Driver');
+        addOption(memberTypeSelect, 'Migrant Worker (Land-Based)');
+        addOption(memberTypeSelect, 'Migrant Worker (Sea-Based)');
+        addOption(memberTypeSelect, 'Lifetime Member');
+        addOption(memberTypeSelect, 'Filipinos with Dual Citizenship/Living Abroad');
+        addOption(memberTypeSelect, 'Foreign National');
+    } else if (indirectRadio.checked) {
+        addOption(memberTypeSelect, 'Listahanan');
+        addOption(memberTypeSelect, '4Ps/MCCT');
+        addOption(memberTypeSelect, 'Senior Citizen');
+        addOption(memberTypeSelect, 'KIA/KIPO');
+        addOption(memberTypeSelect, 'PAMANA');
+        addOption(memberTypeSelect, 'Bangsamoro/Normalization');
+        addOption(memberTypeSelect, 'LGU-sponsored');
+        addOption(memberTypeSelect, 'NGA-sponsored');
+        addOption(memberTypeSelect, 'Private-sponsored');
+        addOption(memberTypeSelect, 'Person with Disability');
+    }
+}
+
+function addOption(selectElement, optionText) {
+    var option = document.createElement('option');
+    option.innerText = optionText;
+    selectElement.appendChild(option);
+}
+
+/*=== TO DISABLE TEXT INPUT IF MEMBER TYPE IS EMPLOYED, LIFETIME MEMBERS, OR SEA-BASED MIGRANT WORKERS ===*/
+
+document.getElementById('membertype').addEventListener('change', updateTextInputStatus);
+
+function updateTextInputStatus() {
+    var memberTypeSelect = document.getElementById('membertype');
+    var professionInput = document.getElementById('profession');
+    var monthlyIncomeInput = document.getElementById('monthly_income');
+    var incomeProofInput = document.getElementById('income_proof');
+    var selectedOption = memberTypeSelect.value;
+
+    if (selectedOption === 'Employed Private' ||
+        selectedOption === 'Employed Government' ||
+        selectedOption === 'Lifetime Member' ||
+        selectedOption === 'Migrant Worker (Sea-Based)') {
+        professionInput.disabled = true;
+        professionInput.value = 'Not Applicable';
+
+        monthlyIncomeInput.disabled = true;
+        monthlyIncomeInput.value = "";
+
+        incomeProofInput.disabled = true;
+        incomeProofInput.value = 'Not Applicable';
+    } else {
+        professionInput.disabled = false;
+        professionInput.value = '';
+
+        monthlyIncomeInput.disabled = false;
+
+        incomeProofInput.disabled = false;
+        incomeProofInput.value = '';
+    }
+}
